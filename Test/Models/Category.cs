@@ -15,5 +15,7 @@ public class Category
     public string Name { get; set; } = String.Empty;
     public int DisplayOrder { get; set; }   
 
-    public DateTime Created { get; set; } = DateTime.Now; 
+[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+public DateTime Created { get; set; } 
+
 }
