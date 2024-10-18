@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,9 +14,11 @@ public class Category
     [Column(TypeName = "TEXT")]
 
     public string Name { get; set; } = String.Empty;
-    public int DisplayOrder { get; set; }   
+    
+    [Range(1, int.MaxValue, ErrorMessage = "Display Order for category must be greater than 0")]
+    public int DisplayOrder { get; set; }
+    [DisplayName("Display Order")]   
 
-[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 public DateTime Created { get; set; } 
 
 }

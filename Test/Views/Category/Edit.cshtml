@@ -1,9 +1,9 @@
 ﻿@model Category
 
-<form method="post">
+<form method="post" asp-action="Edit">
     <div class="border p-3 mt-4">
         <div class="row p-2">
-            <h2 class="text-primary"> Create category</h2>
+            <h2 class="text-primary"> Edit</h2>
             <hr />
         </div>
         <div class="mb-3">
@@ -16,13 +16,14 @@
             <input asp-for="DisplayOrder" class="form-controll">
               <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-Primary" style="width: 150px;" style="border: 2cm; color: darkgray;" > Create</button>
+        <button type="submit" class="btn btn-Primary" style="width: 150px; border: 2cm; color: darkgray;" > Update</button>
         <a asp-controller="Category" asp-action="Index" class="btn btn-Secondary" style="width: 150px;" >
             Back to list 
         </a>
     </div>
 
 </form>
+
 @section script{
 @{
     <partial name="_ValidationScriptsPartial" />
