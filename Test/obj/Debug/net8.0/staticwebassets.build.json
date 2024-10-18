@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/Pa/YjuIHLclNCrMq8AQh3SWkCEUPe/6+63C6NwHB/o=",
+  "Hash": "HGS+f8kLePMJkTHmSlqbcs4cV0ANuEzy6VHLUFaLqEc=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Test.bundle.scp.css"
+    },
+    {
+      "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\css\\darkTheme.css",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "css/darkTheme.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\darkTheme.css"
     },
     {
       "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\css\\site.css",

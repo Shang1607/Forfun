@@ -20,5 +20,10 @@ namespace Test.Controllers
             return View(objCategoryList);
         }
 
+        // get
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }
