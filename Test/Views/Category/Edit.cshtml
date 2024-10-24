@@ -16,7 +16,7 @@
             <input asp-for="DisplayOrder" class="form-controll">
               <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-Primary" style="width: 150px; border: 2cm; color: darkgray;" > Update</button>
+        <button type="submit" class="btn btn-Primary" style="width: 150px; border: 20cm; color:black;" > Update</button>
         <a asp-controller="Category" asp-action="Index" class="btn btn-Secondary" style="width: 150px;" >
             Back to list 
         </a>
@@ -24,9 +24,9 @@
 
 </form>
 
-@section script{
+@section Scripts{
 @{
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial.cshtml" />
 }
 
 }
