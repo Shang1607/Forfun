@@ -1,0 +1,25 @@
+﻿@model User
+
+<form asp-action="Login" method="post">
+    <div class="border p-3 mt-4">
+        <div class="row p-2">
+            <h2 class="text-primary">Logg Inn</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">E-post</label>
+            <input asp-for="Email" class="form-control" type="email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Passord</label>
+            <input asp-for="Password" class="form-control" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Logg Inn</button>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

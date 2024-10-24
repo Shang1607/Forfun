@@ -2,7 +2,30 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Please work</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section text-center">
+    <h1 class="display-4">Velkommen til Matvareportalen</h1>
+    <p class="lead">Enkelt system for bedrifter å administrere matvarer</p>
+    <a asp-controller="Account" asp-action="Signup" class="btn btn-primary btn-lg mt-3">Kom i gang</a>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="bi bi-box-seam feature-icon"></i>
+                <h3>Legg til produkter</h3>
+                <p>Effektivt verktøy for å legge til nye matvarer.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-pencil-square feature-icon"></i>
+                <h3>Rediger informasjon</h3>
+                <p>Hold informasjonen oppdatert med enkel redigering.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="bi bi-bar-chart feature-icon"></i>
+                <h3>Analyser data</h3>
+                <p>Få innsikt i produktene dine med detaljerte analyser.</p>
+            </div>
+        </div>
+    </div>
 </div>

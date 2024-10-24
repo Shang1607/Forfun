@@ -12140,3 +12140,38 @@ textarea.form-control-lg {
   --bs-tooltip-bg: var(--bs-tertiary-bg);
   --bs-tooltip-color: var(--bs-emphasis-color);
 }
+
+.hero-section {
+    background-color: #e0f7fa; /* Lyseblå bakgrunn */
+    color: black; /* Endre tekstfarge hvis nødvendig */
+    padding: 100px 0;
+
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+}
+
+.features-section {
+  padding: 50px 0;
+}
+
+.features-section h3 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #007bff;
+}
+
+.features-section p {
+  color: #6c757d;
+  font-size: 1rem;
+}
