@@ -35,7 +35,9 @@ namespace Test.Migrations
                     CompanyName = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ProfileImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Bio = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

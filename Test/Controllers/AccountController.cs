@@ -43,11 +43,43 @@ namespace Test.Controllers
             return View(model);
         }
 
-        [HttpGet]
+    [HttpPost]
+public IActionResult Login(User model)
+{
+    // Authenticate the user
+    var authenticatedUser = _context.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+
+    if (authenticatedUser != null)
+    {
+        // Log the user in
+        // ...
+
+        // Redirect to the user profile page
+        return RedirectToAction("UserProfile", new { id = authenticatedUser.Id });
+    }
+    else
+    {
+        // Return an error message
+        ModelState.AddModelError("", "Invalid email or password");
+        return View();
+    }
+}
+
+    [HttpGet]
     public IActionResult Login()
     {
     return View(); // Dette vil returnere Views/Account/Login.cshtml
     }
 
+    [HttpGet]
+    public IActionResult UserProfile(int id)
+    {
+    var user = _context.Users.FirstOrDefault(u => u.Id == id);
+    if (user == null)
+    {
+        return NotFound(); // Returnerer 404 hvis brukeren ikke finnes
+    }
+    return View(user); // Sender brukerobjektet til visningen
+    }
     }
 }

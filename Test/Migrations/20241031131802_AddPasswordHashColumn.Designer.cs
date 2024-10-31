@@ -11,8 +11,8 @@ using Test.Data;
 namespace Test.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241024105132_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241031131802_AddPasswordHashColumn")]
+    partial class AddPasswordHashColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace Test.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Bio")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -60,6 +63,9 @@ namespace Test.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProfileImageUrl")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
