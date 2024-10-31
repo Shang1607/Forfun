@@ -14,40 +14,99 @@ namespace Test.Controllers
         }
 
         // GET: Signup
+    
         [HttpGet]
         public IActionResult Signup()
         {
-            return View();
+        var model = new User();
+        return View(model);  // Returnerer signup-skjemaet
         }
-
-        // POST: Signup
-        [HttpPost]
-        public IActionResult Signup(User model)
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Signup(User model)
+    {
+    if (ModelState.IsValid)
+    {
+        try
         {
-            if (ModelState.IsValid)
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            if (existingUser != null)
             {
-                // Sjekk om e-post allerede eksisterer
-                var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-                if (existingUser != null)
-                {
-                    ModelState.AddModelError("Email", "E-post allerede i bruk");
-                    return View(model);
-                }
-
-                // Legg til ny bruker i databasen
-                _context.Users.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Login");
+                ModelState.AddModelError("Email", "E-post allerede i bruk");
+                return View(model);
             }
 
-            return View(model);
+            _context.Users.Add(model);
+
+            _context.SaveChanges();  // Dette kan kaste unntak
+
+            return RedirectToAction("UserProfile", new { id = model.Id });
+        }
+        catch (Exception ex)
+        {
+               // Logg hele unntaket, inkludert stack trace
+        Console.WriteLine("Feil under lagring: " + ex.ToString());
+    
+         // Returner visningen med feil for debugging
+        return View(model);  // Returner visningen i stedet for å vise en blank side
+        }
+    }
+
+    return View(model);
+}
+
+
+        [HttpGet]
+        public IActionResult UserProfile(int id)
+        {
+        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+        if (user == null)
+        {
+        return NotFound(); // Hvis brukeren ikke finnes
+        }
+        return View(user); // Sender brukerobjektet til visningen
+        }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+        return View(); // Dette vil returnere Views/Account/Login.cshtml
         }
 
         [HttpGet]
-    public IActionResult Login()
-    {
-    return View(); // Dette vil returnere Views/Account/Login.cshtml
-    }
+        public IActionResult EditProfile(int id)
+        {
+        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+        if (user == null)
+        {
+        return NotFound();
+        }
+        return View(user);
+        }
 
+        [HttpPost]
+        public IActionResult EditProfile(User model)
+        {
+        if (ModelState.IsValid)
+        {
+        var user = _context.Users.FirstOrDefault(u => u.Id == model.Id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.CompanyName = model.CompanyName;
+        user.Bio = model.Bio;
+        user.ProfileImageUrl = model.ProfileImageUrl;
+
+        _context.SaveChanges();
+        return RedirectToAction("UserProfile", new { id = user.Id });
+        }
+        return View(model);
+        }
+
+        
     }
 }

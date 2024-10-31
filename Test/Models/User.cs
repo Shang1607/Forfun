@@ -19,6 +19,10 @@ namespace Test.Models
         [MinLength(10, ErrorMessage = "password has to be atleast 10 in length")]
         public string Password { get; set; }
 
+         
+         public string Bio { get; set; } 
+        public string ProfileImageUrl { get; set; } // Lenke til profilbilde
+
         [Required]
         public DateTime CreatedAt { get; set; }
     }

@@ -18,12 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\kakas\OneDrive\Skrivebord\anvendt data teknologi\3.året\termin 1\web aplikasjoner\Forfun\Test
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/kakas/OneDrive/Skrivebord/anvendt data teknologi/3.året/termin 1/web aplikasjoner/Forfun/Test/Views/Account/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kakas/OneDrive/Skrivebord/anvendt data teknologi/3.året/termin 1/web aplikasjoner/Forfun/Test/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kakas/OneDrive/Skrivebord/anvendt data teknologi/3.året/termin 1/web aplikasjoner/Forfun/Test/Views/Account/Signup.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWdudXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kakas/OneDrive/Skrivebord/anvendt data teknologi/3.året/termin 1/web aplikasjoner/Forfun/Test/Views/Account/UserProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxVc2VyUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kakas/OneDrive/Skrivebord/anvendt data teknologi/3.året/termin 1/web aplikasjoner/Forfun/Test/Views/Category/Create.cshtml]

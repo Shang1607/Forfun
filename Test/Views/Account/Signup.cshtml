@@ -1,34 +1,29 @@
-﻿@model User
+﻿@model Test.Models.User
 
-<div class="auth-container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 signup-section">
-            <h2>Registrer deg</h2>
-            <form asp-action="Signup" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="mb-3">
-                    <label asp-for="CompanyName" class="form-label">Bedriftsnavn</label>
-                    <input asp-for="CompanyName" class="form-control" />
-                    <span asp-validation-for="CompanyName" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Email" class="form-label">E-post</label>
-                    <input asp-for="Email" class="form-control" type="email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Password" class="form-label">Passord</label>
-                    <input asp-for="Password" class="form-control" type="password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Registrer deg</button>
-            </form>
-            <hr />
-            <p>Har du allerede en konto?</p>
-            <a asp-controller="Account" asp-action="Login" class="btn btn-secondary">Logg Inn</a>
-        </div>
+<form asp-action="Signup" method="post">
+    @Html.AntiForgeryToken()
+    
+    <!-- Valideringsoppsummering -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="CompanyName" class="form-label">Bedriftsnavn</label>
+        <input asp-for="CompanyName" class="form-control" />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
     </div>
-</div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">E-post</label>
+        <input asp-for="Email" class="form-control" type="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Passord</label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrer deg</button>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

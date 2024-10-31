@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Test.Data;
 using Test.Models;
@@ -28,6 +29,9 @@ namespace Test.Controllers
         }
 
         // post
+        
+
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category obj)
@@ -110,8 +114,8 @@ namespace Test.Controllers
 
                 return RedirectToAction("Index");
             
-        return View(obj);
         }     
+
 
     }
 

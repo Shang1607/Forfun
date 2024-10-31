@@ -1,0 +1,20 @@
+﻿@model User
+
+<div class="profile-container">
+    <div class="row">
+        <div class="col-md-3">
+            
+            <img src="@Model.ProfileImageUrl" alt="Profilbilde" class="img-thumbnail" />
+        </div>
+        <div class="col-md-9">
+            <h2>@Model.CompanyName</h2>
+            <p><strong>E-post:</strong> @Model.Email</p>
+            <p><strong>Om:</strong> @Model.Bio</p>
+            <p><strong>Registrert:</strong> @Model.CreatedAt.ToString("dd.MM.yyyy")</p>
+
+            
+            <a asp-controller="Account" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary">Rediger profil</a>
+            <a asp-controller="Category" asp-action="UserCategories" asp-route-id="@Model.Id" class="btn btn-secondary">Se kategoriene dine</a>
+        </div>
+    </div>
+</div>
