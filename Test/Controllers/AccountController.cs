@@ -14,13 +14,13 @@ namespace Test.Controllers
         }
 
         // GET: Signup
+    [HttpGet]
+    public IActionResult Signup()
+{
     
-        [HttpGet]
-        public IActionResult Signup()
-        {
-        var model = new User();
-        return View(model);  // Returnerer signup-skjemaet
-        }
+    var model = new User { CompanyName = "", Email = "", Password = "" };
+    return View(model);  // Returnerer signup-skjemaet
+}
     
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -99,8 +99,7 @@ namespace Test.Controllers
 
         user.CompanyName = model.CompanyName;
         user.Bio = model.Bio;
-        user.ProfileImageUrl = model.ProfileImageUrl;
-
+        
         _context.SaveChanges();
         return RedirectToAction("UserProfile", new { id = user.Id });
         }
