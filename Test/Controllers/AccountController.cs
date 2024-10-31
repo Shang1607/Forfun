@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Test.Data;
 using Test.Models;
 
 namespace Test.Controllers
 {
-    public class AccountController : Controller
+     public class AccountController : Controller
     {
         private readonly ApplicationDBContext _context;
 
@@ -21,40 +22,48 @@ namespace Test.Controllers
         }
 
         // POST: Signup
-        [HttpPost]
-        public IActionResult Signup(User model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Sjekk om e-post allerede eksisterer
-                var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-                if (existingUser != null)
-                {
-                    ModelState.AddModelError("Email", "E-post allerede i bruk");
-                    return View(model);
-                }
+       [HttpPost]
+  public IActionResult Signup([FromBody]User model)
+       {
+        
+           Console.WriteLine($"Model: {model}");
+           
+           if (ModelState.IsValid)
+           {
+               // Sjekk om e-post allerede eksisterer
+               var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+               if (existingUser != null)
+               {
+                   ModelState.AddModelError("Email", "E-post allerede i bruk");
+                   return View(model);
+               }
+       
+               // Hasher passordet
+               var passwordHasher = new PasswordHasher<User>();
+               model.PasswordHash = passwordHasher.HashPassword(model, model.Password);
+       
+               // Legg til ny bruker i databasen
+               _context.Users.Add(model);
+               _context.SaveChanges();
+               return RedirectToAction("Login");
+           }
+       
+           return View(model);
+       }
 
-                // Legg til ny bruker i databasen
-                _context.Users.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Login");
-            }
-
-            return View(model);
-        }
-
-    [HttpPost]
+[HttpPost]
 public IActionResult Login(User model)
 {
+    if (!ModelState.IsValid)
+    {
+        return View(model);
+    }
+
     // Authenticate the user
     var authenticatedUser = _context.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
     if (authenticatedUser != null)
     {
-        // Log the user in
-        // ...
-
-        // Redirect to the user profile page
         return RedirectToAction("UserProfile", new { id = authenticatedUser.Id });
     }
     else
@@ -82,4 +91,11 @@ public IActionResult Login(User model)
     return View(user); // Sender brukerobjektet til visningen
     }
     }
-}
+
+
+}   
+
+
+
+
+   

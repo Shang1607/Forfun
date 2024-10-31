@@ -110,7 +110,7 @@ namespace Test.Controllers
 
                 return RedirectToAction("Index");
             
-        return View(obj);
+
         }     
 
     }
