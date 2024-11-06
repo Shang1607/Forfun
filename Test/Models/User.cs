@@ -1,32 +1,28 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-namespace Test.Models;
 
+namespace Test.Models;
 public class User
 {
     [Key]
     public int Id { get; set; }
 
-    [Required]
-    public string? CompanyName { get; set; }
+    [Required(ErrorMessage = "Firmanavn er påkrevd")]
+    public required string CompanyName { get; set; }
 
-    [Required]
-    [EmailAddress]
-    public string Email { get; set; }
+    [Required(ErrorMessage = "E-post er påkrevd")]
+    [EmailAddress(ErrorMessage = "Ugyldig e-postadresse")]
+    public required string Email { get; set; }
 
-    [Required]
-    [MinLength(6)]
+    [Required(ErrorMessage = "Passord er påkrevd")]
+    [MinLength(6, ErrorMessage = "Passord må være minst 6 tegn")]
     [DataType(DataType.Password)]
-    public string Password { get; set; }
+    public required string Password { get; set; }
 
     public string? ProfileImageUrl { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; }
 
     public string? Bio { get; set; }
 
-    [NotMapped]
-    [JsonIgnore]
-    public object PasswordHash { get; internal set; }
+    public string? PasswordHash { get; set; }
 }

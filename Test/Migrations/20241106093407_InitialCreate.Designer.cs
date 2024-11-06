@@ -11,8 +11,8 @@ using Test.Data;
 namespace Test.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241031131802_AddPasswordHashColumn")]
-    partial class AddPasswordHashColumn
+    [Migration("20241106093407_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,10 @@ namespace Test.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

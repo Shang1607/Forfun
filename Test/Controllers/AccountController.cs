@@ -22,34 +22,50 @@ namespace Test.Controllers
         }
 
         // POST: Signup
-       [HttpPost]
-  public IActionResult Signup([FromBody]User model)
-       {
-        
-           Console.WriteLine($"Model: {model}");
-           
-           if (ModelState.IsValid)
-           {
-               // Sjekk om e-post allerede eksisterer
-               var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-               if (existingUser != null)
-               {
-                   ModelState.AddModelError("Email", "E-post allerede i bruk");
-                   return View(model);
-               }
-       
-               // Hasher passordet
-               var passwordHasher = new PasswordHasher<User>();
-               model.PasswordHash = passwordHasher.HashPassword(model, model.Password);
-       
-               // Legg til ny bruker i databasen
-               _context.Users.Add(model);
-               _context.SaveChanges();
-               return RedirectToAction("Login");
-           }
-       
-           return View(model);
-       }
+[HttpPost]
+public IActionResult Signup(User model)
+{
+    if (ModelState.IsValid)
+    {
+        // Sjekk om e-post allerede eksisterer
+        var existingUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+        if (existingUser != null)
+        {
+            ModelState.AddModelError("Email", "E-post allerede i bruk");
+            return View(model);
+        }
+
+        // Hasher passordet
+        var passwordHasher = new PasswordHasher<User>();
+        model.PasswordHash = passwordHasher.HashPassword(model, model.Password);
+
+        // Nullstill passordfeltet for sikkerhet
+        // model.Password = null;
+
+        // Legg til ny bruker i databasen
+        model.CreatedAt = DateTime.Now;
+        _context.Users.Add(model);
+        _context.SaveChanges();
+        return RedirectToAction("Login");
+    } else
+    {
+        // Iterate through ModelState errors and log them
+        foreach (var state in ModelState)
+        {
+            foreach (var error in state.Value.Errors)
+            {
+                Console.WriteLine($"Key: {state.Key}, Error: {error.ErrorMessage}");
+            }
+        }
+
+        // Optionally, you can add a general error message
+        ModelState.AddModelError("", "There were validation errors. Please review the form and correct them.");
+    }
+
+    return View(model);
+}
+
+
 
 [HttpPost]
 public IActionResult Login(User model)
@@ -59,18 +75,32 @@ public IActionResult Login(User model)
         return View(model);
     }
 
-    // Authenticate the user
-    var authenticatedUser = _context.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+    // Hent brukeren basert på e-post
+    var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
 
-    if (authenticatedUser != null)
+    if (user != null)
     {
-        return RedirectToAction("UserProfile", new { id = authenticatedUser.Id });
+        // Verifiser passordet
+        var passwordHasher = new PasswordHasher<User>();
+        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+
+        if (result == PasswordVerificationResult.Success)
+        {
+            // Autentisering vellykket
+            return RedirectToAction("UserProfile", new { id = user.Id });
+        }
+        else
+        {
+            // Feil passord
+            ModelState.AddModelError("", "Ugyldig e-post eller passord");
+            return View(model);
+        }
     }
     else
     {
-        // Return an error message
-        ModelState.AddModelError("", "Invalid email or password");
-        return View();
+        // Bruker ikke funnet
+        ModelState.AddModelError("", "Ugyldig e-post eller passord");
+        return View(model);
     }
 }
 
@@ -92,10 +122,4 @@ public IActionResult Login(User model)
     }
     }
 
-
 }   
-
-
-
-
-   

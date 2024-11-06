@@ -37,7 +37,8 @@ namespace Test.Migrations
                     Password = table.Column<string>(type: "TEXT", nullable: false),
                     ProfileImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Bio = table.Column<string>(type: "TEXT", nullable: true)
+                    Bio = table.Column<string>(type: "TEXT", nullable: true),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
