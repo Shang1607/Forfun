@@ -1,35 +1,28 @@
 ﻿@model Test.Models.User
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Din Profil</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1>Din Profil</h1>
-        <p>Her kan du se informasjonen om kontoen din.</p>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">@Model.CompanyName</h5>
-                <p class="card-text"><strong>E-post:</strong> @Model.Email</p>
-                <p class="card-text"><strong>Biografi:</strong> @Model.Bio</p>
-                <p class="card-text"><strong>Profilbilde:</strong></p>
-                @if (Model.ProfileImageUrl != null)
-
-                {
-                    <img src="@Model.ProfileImageUrl" alt="Profilbilde" class="img-thumbnail" style="width: 150px;">
-                }
-                else
-                {
-                    <p>Ingen profilbilde lastet opp.</p>
-                }
-            </div>
+<div class="container mt-5">
+    <h1>Din Profil</h1>
+    <p>Her kan du se informasjonen om kontoen din.</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.CompanyName</h5>
+            <p class="card-text"><strong>E-post:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Biografi:</strong> @Model.Bio</p>
+            <p class="card-text"><strong>Profilbilde:</strong></p>
+            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+            {
+                <img src="@Model.ProfileImageUrl" alt="Profilbilde" class="img-thumbnail" style="width: 150px;">
+            }
+            else
+            {
+                <p>Ingen profilbilde lastet opp.</p>
+            }
         </div>
-        <a asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-primary mt-3">Rediger Profil</a>
     </div>
-</body>
-</html>
+
+    <!-- Knapp for å redigere profil -->
+    <a asp-action="EditProfile" class="btn btn-primary mt-3">Rediger Profil</a>
+
+    <!-- Knapp for å endre passord -->
+    <a asp-action="ChangePassword" class="btn btn-secondary mt-3">Endre Passord</a>
+</div>
