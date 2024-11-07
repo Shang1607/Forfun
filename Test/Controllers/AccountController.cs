@@ -68,12 +68,47 @@ namespace Test.Controllers
         return View(model);
          }
 
-        [HttpPost]
-        public IActionResult EditProfile(User model, IFormFile ProfileImage)
+
+          // GET: EditProfile
+        [HttpGet]
+        public IActionResult EditProfile()
         {
+            // Hent bruker-ID fra session
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                // Bruker er ikke innlogget
+                return RedirectToAction("Login");
+            }
 
+            // Hent brukeren fra databasen
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId.Value);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-            // Hent den innloggede brukeren fra databasen
+            // Opprett en ViewModel med eksisterende data
+            var model = new EditProfileViewModel
+            {
+                CompanyName = user.CompanyName,
+                Bio = user.Bio,
+                ExistingProfileImageUrl = user.ProfileImageUrl
+            };
+
+            return View(model);
+        }
+
+        // POST: EditProfile
+        [HttpPost]
+        public IActionResult EditProfile(EditProfileViewModel model, IFormFile ProfileImage)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Hent bruker-ID fra session
             var userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
@@ -81,19 +116,20 @@ namespace Test.Controllers
             }
 
             // Hent brukeren fra databasen
-             var user = _context.Users.FirstOrDefault(u => u.Id == userId.Value);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId.Value);
             if (user == null)
             {
-            return NotFound();
+                return NotFound();
             }
 
-            // Oppdater bio
+            // Oppdater brukerens informasjon
+            user.CompanyName = model.CompanyName;
             user.Bio = model.Bio;
 
             // Håndter opplasting av profilbilde
             if (ProfileImage != null && ProfileImage.Length > 0)
             {
-                // Generer unik filnavn
+                // Generer unikt filnavn
                 var fileName = $"{Guid.NewGuid()}_{ProfileImage.FileName}";
                 var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
                 var filePath = Path.Combine(uploads, fileName);
@@ -118,10 +154,13 @@ namespace Test.Controllers
             _context.SaveChanges();
 
             // Omdiriger tilbake til profilsiden
-            return RedirectToAction("UserProfile", new { id = user.Id });
+            return RedirectToAction("UserProfile");
         }
+    
 
-        [HttpGet]
+
+
+    [HttpGet]
     public IActionResult ChangePassword()
     {
         return View();
@@ -208,18 +247,30 @@ namespace Test.Controllers
         return View(); // Dette vil returnere Views/Account/Login.cshtml
         }
 
-        [HttpGet]
-        public IActionResult UserProfile(int id)
+        
+    // GET: UserProfile
+    [HttpGet]
+    public IActionResult UserProfile()
+    {
+        // Hent bruker-ID fra session
+        var userId = HttpContext.Session.GetInt32("UserId");
+        if (userId == null)
         {
-        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            // Bruker er ikke innlogget
+            return RedirectToAction("Login");
+        }
+
+        // Hent brukeren fra databasen
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId.Value);
         if (user == null)
         {
-        return NotFound(); // Returnerer 404 hvis brukeren ikke finnes
+            return NotFound();
         }
-        return View(user); // Sender brukerobjektet til visningen
-        }
+
+        // Returner visningen med brukerdata
+        return View(user);
+    }
+    
     }
 
-
-
-}   
+}  

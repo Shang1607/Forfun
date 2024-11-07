@@ -249,6 +249,10 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\2c766017-9405-441a-8476-c9de25f2fde9_wp10165089-genshin-impact-scenery-wallpapers.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2c766017-9405-441a-8476-c9de25f2fde9_wp10165089-genshin-impact-scenery-wallpapers.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Test.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
