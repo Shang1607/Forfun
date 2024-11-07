@@ -68,41 +68,41 @@ public IActionResult Signup(User model)
 
 
 [HttpPost]
-public IActionResult Login(User model)
+public IActionResult Login(LoginViewModel model)
 {
     if (!ModelState.IsValid)
     {
+        // Log validation errors
+        foreach (var state in ModelState)
+        {
+            foreach (var error in state.Value.Errors)
+            {
+                Console.WriteLine($"Key: {state.Key}, Error: {error.ErrorMessage}");
+            }
+        }
         return View(model);
     }
 
-    // Hent brukeren basert på e-post
+    // Authenticate the user
     var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-
     if (user != null)
     {
-        // Verifiser passordet
+        // Verify the password
         var passwordHasher = new PasswordHasher<User>();
         var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
 
         if (result == PasswordVerificationResult.Success)
         {
-            // Autentisering vellykket
+            // TODO: Set authentication cookie or session
             return RedirectToAction("UserProfile", new { id = user.Id });
         }
-        else
-        {
-            // Feil passord
-            ModelState.AddModelError("", "Ugyldig e-post eller passord");
-            return View(model);
-        }
     }
-    else
-    {
-        // Bruker ikke funnet
-        ModelState.AddModelError("", "Ugyldig e-post eller passord");
-        return View(model);
-    }
+
+    // Authentication failed
+    ModelState.AddModelError("", "Ugyldig e-post eller passord");
+    return View(model);
 }
+
 
     [HttpGet]
     public IActionResult Login()
