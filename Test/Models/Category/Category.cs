@@ -19,6 +19,6 @@ public class Category
     public int DisplayOrder { get; set; }
     [DisplayName("Display Order")]   
 
-public DateTime Created { get; set; } 
+    public DateTime Created { get; set; } 
 
 }

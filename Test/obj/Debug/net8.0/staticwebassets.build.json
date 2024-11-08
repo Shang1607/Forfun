@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "21G3G8ux9cFpu0Qv3ldshk/l9ETMTyxw9BiYjQCldlY=",
+  "Hash": "36m66SSwDQEv7Bvf7KI0XTNg2Pq4lCy/+PiB6jYwc3Y=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -1214,6 +1214,44 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
+      "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\294d9e12-2f2f-4816-88a1-84aa9ae78a8f_1161813.jpg",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "uploads/294d9e12-2f2f-4816-88a1-84aa9ae78a8f_1161813.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\294d9e12-2f2f-4816-88a1-84aa9ae78a8f_1161813.jpg"
+    },
+    {
+      "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\2950d5f2-4c3a-438f-a5bc-7aba02041ae8_burgerkingLogo.png",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "uploads/2950d5f2-4c3a-438f-a5bc-7aba02041ae8_burgerkingLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\2950d5f2-4c3a-438f-a5bc-7aba02041ae8_burgerkingLogo.png"
+    },
+    {
       "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\2c766017-9405-441a-8476-c9de25f2fde9_wp10165089-genshin-impact-scenery-wallpapers.jpg",
       "SourceId": "Test",
       "SourceType": "Discovered",
@@ -1250,6 +1288,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\302673bd-c466-459f-a345-6bdc7a5c23f9_1169180.jpg"
+    },
+    {
+      "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "uploads/e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png"
     }
   ]
 }

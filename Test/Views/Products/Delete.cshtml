@@ -1,0 +1,21 @@
+﻿@model Test.Models.Product
+
+@{
+    ViewData["Title"] = "Slett produkt";
+}
+
+<h1>Slett produkt</h1>
+
+<h3>Er du sikker på at du vil slette dette produktet?</h3>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>@Model.Description</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Slett</button>
+    <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+</form>

@@ -6,9 +6,9 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">@Model.CompanyName</h5>
-            <p class="card-text"><strong>E-post:</strong> @Model.Email</p>
-            <p class="card-text"><strong>Biografi:</strong> @Model.Bio</p>
-            <p class="card-text"><strong>Profilbilde:</strong></p>
+            
+            <!-- <p class="card-text"><strong>Profilbilde</strong></p> -->
+            <br/>
             @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
             {
                 <img src="@Model.ProfileImageUrl" alt="Profilbilde" class="img-thumbnail" style="width: 150px;">
@@ -17,6 +17,11 @@
             {
                 <p>Ingen profilbilde lastet opp.</p>
             }
+            <br/>
+            <br/>
+            <p class="card-text"><strong>E-post:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Biografi:</strong> @Model.Bio</p>
+ 
         </div>
     </div>
 

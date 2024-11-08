@@ -1,0 +1,22 @@
+﻿@model Test.Models.Product
+
+@{
+    ViewData["Title"] = "Produktdetaljer";
+}
+
+<h1>@Model.Name</h1>
+
+<p><strong>Beskrivelse:</strong> @Model.Description</p>
+<p><strong>Kalorier:</strong> @Model.Calories</p>
+<p><strong>Fett:</strong> @Model.Fat</p>
+<p><strong>Karbohydrater:</strong> @Model.Carbohydrates</p>
+<p><strong>Proteiner:</strong> @Model.Protein</p>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Tilbake til liste</a>
+    @if (Context.Session.GetInt32("UserId") == @Model.UserId)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Rediger</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Slett</a>
+    }
+</p>

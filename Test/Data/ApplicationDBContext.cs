@@ -11,7 +11,9 @@ public class ApplicationDBContext: DbContext
         Database.EnsureCreated();
     }
 
-    public DbSet<Category> Categories { get; set; } 
+    public DbSet<Category> Categories { get; set; }  // migrates categories
 
-     public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; } // migrate users
+
+     public DbSet<Product> Products { get; set; } // migrate products
 }

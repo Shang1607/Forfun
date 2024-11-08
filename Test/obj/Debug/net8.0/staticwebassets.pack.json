@@ -249,12 +249,24 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\294d9e12-2f2f-4816-88a1-84aa9ae78a8f_1161813.jpg",
+      "PackagePath": "staticwebassets\\uploads\\294d9e12-2f2f-4816-88a1-84aa9ae78a8f_1161813.jpg"
+    },
+    {
+      "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\2950d5f2-4c3a-438f-a5bc-7aba02041ae8_burgerkingLogo.png",
+      "PackagePath": "staticwebassets\\uploads\\2950d5f2-4c3a-438f-a5bc-7aba02041ae8_burgerkingLogo.png"
+    },
+    {
       "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\2c766017-9405-441a-8476-c9de25f2fde9_wp10165089-genshin-impact-scenery-wallpapers.jpg",
       "PackagePath": "staticwebassets\\uploads\\2c766017-9405-441a-8476-c9de25f2fde9_wp10165089-genshin-impact-scenery-wallpapers.jpg"
     },
     {
       "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\302673bd-c466-459f-a345-6bdc7a5c23f9_1169180.jpg",
       "PackagePath": "staticwebassets\\uploads\\302673bd-c466-459f-a345-6bdc7a5c23f9_1169180.jpg"
+    },
+    {
+      "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\uploads\\e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png",
+      "PackagePath": "staticwebassets\\uploads\\e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Test.Microsoft.AspNetCore.StaticWebAssets.props",

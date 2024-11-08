@@ -34,6 +34,12 @@
 
         </li>
         <li class="nav-item">
+
+        <a class="nav-link" asp-controller="Products" asp-action="Index">Produkter</a>
+        
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
         <li class="nav-item">
@@ -55,12 +61,13 @@
     {
         <!-- User is logged in -->
         <div class="dropdown">
-            <a class="btn btn-primary btn-lg dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Display user's company name -->
-                @Context.Session.GetString("CompanyName") ?? "Profile"
+                @Context.Session.GetString("CompanyName")
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 <li><a class="dropdown-item" asp-controller="Account" asp-action="UserProfile">Profile</a></li>
+                <li><a class="dropdown-item" asp-controller="Account" asp-action="EditProfile">Edit profile</a></li>
                 <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
