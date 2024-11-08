@@ -229,7 +229,9 @@ namespace Test.Controllers
         {
             // bruk av seassion 
             HttpContext.Session.SetInt32("UserId", user.Id);
-            
+            HttpContext.Session.SetString("CompanyName", user.CompanyName ?? user.Email);
+            // saves the mail in the session as well
+
             // TODO: Set authentication cookie or session
             return RedirectToAction("UserProfile", new { id = user.Id });
         }
@@ -244,8 +246,20 @@ namespace Test.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-        return View(); // Dette vil returnere Views/Account/Login.cshtml
+        return View(); // returns Views/Account/Login.cshtml
         }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Logout()
+    {
+    // Clear the session
+    HttpContext.Session.Clear();
+
+    // Redirect to home page or login page
+    return RedirectToAction("Index", "Home");
+    }
+
 
         
     // GET: UserProfile
@@ -270,7 +284,7 @@ namespace Test.Controllers
         // Returner visningen med brukerdata
         return View(user);
     }
-    
+
     }
 
 }  
