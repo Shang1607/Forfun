@@ -4,36 +4,62 @@
     ViewData["Title"] = "Produktdetaljer";
 }
 
-<h1>@Model.Name</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">@Model.Name</h1>
 
-<p><strong>Beskrivelse:</strong> @Model.Description</p>
-<p><strong>Kalorier:</strong> @Model.Calories</p>
-<p><strong>Fett:</strong> @Model.Fat</p>
-<p><strong>Karbohydrater:</strong> @Model.Carbohydrates</p>
-<p><strong>Proteiner:</strong> @Model.Protein</p>
+    <div class="row">
+        <!-- Venstre kolonne: Produktdetaljer -->
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Produktinformasjon</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Beskrivelse:</strong> @Model.Description</li>
+                        <li class="list-group-item"><strong>Kalorier:</strong> @Model.Calories</li>
+                        <li class="list-group-item"><strong>Fett:</strong> @Model.Fat</li>
+                        <li class="list-group-item"><strong>Karbohydrater:</strong> @Model.Carbohydrates</li>
+                        <li class="list-group-item"><strong>Proteiner:</strong> @Model.Protein</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
- <h3>Kategorier:</h3>
-<ul>
-    @foreach (var pc in Model.ProductCategories)
-    {
-        <li>
-            @if (pc.Category.IsKeyhole)
-            {
-                <strong>@pc.Category.Name</strong>
-            }
-            else
-            {
-                @pc.Category.Name
-            }
-        </li>
-    }
-</ul>
+        <!-- Høyre kolonne: Kategorier -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Kategorier</h5>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var pc in Model.ProductCategories)
+                        {
+                            <li class="list-group-item d-flex align-items-center">
+                                @if (pc.Category.IsKeyhole)
+                                {
+                                    <!-- Ikon for nøkkelhullmerket -->
+                                    <i class="bi bi-star-fill text-success me-2"></i>
+                                    <strong>@pc.Category.Name</strong>
+                                }
+                                else
+                                {
+                                    <!-- Standard ikon -->
+                                    <i class="bi bi-tag-fill text-secondary me-2"></i>
+                                    @pc.Category.Name
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<p>
-    <a asp-action="Index" class="btn btn-secondary">Tilbake til liste</a>
-    @if (Context.Session.GetInt32("UserId") == @Model.UserId)
-    {
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Rediger</a>
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Slett</a>
-    }
-</p>
+    <!-- Handlingsknapper -->
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Tilbake til liste</a>
+        @if (Context.Session.GetInt32("UserId") == @Model.UserId)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Rediger</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Slett</a>
+        }
+    </div>
+</div>
