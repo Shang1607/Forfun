@@ -12,6 +12,23 @@
 <p><strong>Karbohydrater:</strong> @Model.Carbohydrates</p>
 <p><strong>Proteiner:</strong> @Model.Protein</p>
 
+ <h3>Kategorier:</h3>
+<ul>
+    @foreach (var pc in Model.ProductCategories)
+    {
+        <li>
+            @if (pc.Category.IsKeyhole)
+            {
+                <strong>@pc.Category.Name</strong>
+            }
+            else
+            {
+                @pc.Category.Name
+            }
+        </li>
+    }
+</ul>
+
 <p>
     <a asp-action="Index" class="btn btn-secondary">Tilbake til liste</a>
     @if (Context.Session.GetInt32("UserId") == @Model.UserId)

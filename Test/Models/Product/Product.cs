@@ -34,5 +34,10 @@ namespace Test.Models
         // Fremmednøkkel til bruker
         public int UserId { get; set; }
         public User? User { get; set; }
+
+
+        // for å koble de samme, og lage mange til mange relasjoner
+         public ICollection<ProductCategory>? ProductCategories { get; set; }
+         
     }
 }

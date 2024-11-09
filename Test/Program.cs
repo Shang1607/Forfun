@@ -29,6 +29,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// sørger for at kategoriene legges til i databasen når applikasjonen starter.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDBContext>();
+    DbInitializer.Initialize(context);
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
