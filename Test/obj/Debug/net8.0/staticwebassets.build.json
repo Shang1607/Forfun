@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wZvzGQ+wgVrqWC/AGNrX9StCXJBLUz23OJYlKC4I8To=",
+  "Hash": "dFKt3jC8C4TKh/zh5HY6qpEZ3+qhT5sh+8TPiFZNqKc=",
   "Source": "Test",
   "BasePath": "_content/Test",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\Images\\hero-background.jpg",
+      "SourceId": "Test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\",
+      "BasePath": "_content/Test",
+      "RelativePath": "Images/hero-background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\hero-background.jpg"
     },
     {
       "Identity": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\js\\site.js",

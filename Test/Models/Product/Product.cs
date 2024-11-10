@@ -38,6 +38,8 @@ namespace Test.Models
 
         // for å koble de samme, og lage mange til mange relasjoner
          public ICollection<ProductCategory>? ProductCategories { get; set; }
+
+         public string? ImageUrl { get; set; }
          
     }
 }

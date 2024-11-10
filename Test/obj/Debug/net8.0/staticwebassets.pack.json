@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Test.bundle.scp.css"
     },
     {
+      "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\Images\\hero-background.jpg",
+      "PackagePath": "staticwebassets\\Images\\hero-background.jpg"
+    },
+    {
       "Id": "c:\\Users\\kakas\\OneDrive\\Skrivebord\\anvendt data teknologi\\3.året\\termin 1\\web aplikasjoner\\Forfun\\Test\\wwwroot\\css\\darkTheme.css",
       "PackagePath": "staticwebassets\\css\\darkTheme.css"
     },

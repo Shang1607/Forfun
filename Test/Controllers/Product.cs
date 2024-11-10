@@ -3,15 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using Test.Data;
 using Test.Models;
 
+
+
 namespace Test.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;        
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductsController(ApplicationDBContext context)
+
+        public ProductsController(ApplicationDBContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Products
@@ -54,12 +59,12 @@ namespace Test.Controllers
 
 
         // POST: Products/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product, int[] selectedCategories)
-        {
-        if (ModelState.IsValid)
-        {
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(Product product, int[] selectedCategories, IFormFile ImageUrl)
+    {
+    if (ModelState.IsValid)
+    {
         var userId = HttpContext.Session.GetInt32("UserId");
         if (userId == null)
         {
@@ -68,26 +73,52 @@ namespace Test.Controllers
         product.UserId = userId.Value;
         product.CreatedAt = DateTime.Now;
 
+        // Håndtere bildeopplasting
+        if (ImageUrl != null && ImageUrl.Length > 0)
+        {
+            // Generer et unikt filnavn
+            var fileName = Path.GetFileNameWithoutExtension(ImageUrl.FileName);
+            var extension = Path.GetExtension(ImageUrl.FileName);
+            var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+            // Angi banen der filen skal lagres
+            var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploads))
+            {
+                Directory.CreateDirectory(uploads);
+            }
+
+            var filePath = Path.Combine(uploads, uniqueFileName);
+
+            // Lagre filen
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                ImageUrl.CopyTo(fileStream);
+            }
+
+            // Lagre filbanen i produktet
+            product.ImageUrl = $"/uploads/{uniqueFileName}";
+        }
+
         // Legg til de valgte kategoriene
         product.ProductCategories = new List<ProductCategory>();
         foreach (var categoryId in selectedCategories)
         {
             product.ProductCategories.Add(new ProductCategory
             {
-                CategoryId = categoryId,
-                ProductId = product.Id
+                CategoryId = categoryId
             });
         }
 
         _context.Products.Add(product);
         _context.SaveChanges();
         return RedirectToAction(nameof(Index));
-        }      
+    }
 
-        // Hvis modellen ikke er gyldig, send kategoriene tilbake til visningen
-        ViewBag.Categories = _context.Categories.ToList();
-        return View(product);
-        }
+    // Hvis noe går galt, send kategoriene tilbake til visningen
+    ViewBag.Categories = _context.Categories.ToList();
+    return View(product);
+}
 
 
         // GET: Products/Edit/5
@@ -116,10 +147,10 @@ namespace Test.Controllers
 
 
         // POST: Products/Edit/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Edit(int id, Product product, int[] selectedCategories)
-    {
+ [HttpPost]
+[ValidateAntiForgeryToken]
+public IActionResult Edit(int id, Product product, int[] selectedCategories, IFormFile ImageUrl)
+{
     var userId = HttpContext.Session.GetInt32("UserId");
     if (userId == null)
     {
@@ -147,14 +178,50 @@ namespace Test.Controllers
         existingProduct.Carbohydrates = product.Carbohydrates;
         existingProduct.Protein = product.Protein;
 
+        // Håndtere bildeopplasting
+        if (ImageUrl != null && ImageUrl.Length > 0)
+        {
+            // Slett eksisterende bilde hvis det finnes
+            if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
+            {
+                var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, existingProduct.ImageUrl.TrimStart('/'));
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            // Generer et unikt filnavn
+            var fileName = Path.GetFileNameWithoutExtension(ImageUrl.FileName);
+            var extension = Path.GetExtension(ImageUrl.FileName);
+            var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+            // Angi banen der filen skal lagres
+            var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploads))
+            {
+                Directory.CreateDirectory(uploads);
+            }
+
+            var filePath = Path.Combine(uploads, uniqueFileName);
+
+            // Lagre filen
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                ImageUrl.CopyTo(fileStream);
+            }
+
+            // Lagre filbanen i produktet
+            existingProduct.ImageUrl = $"/uploads/{uniqueFileName}";
+        }
+
         // Oppdater kategorier
         existingProduct.ProductCategories.Clear();
         foreach (var categoryId in selectedCategories)
         {
             existingProduct.ProductCategories.Add(new ProductCategory
             {
-                CategoryId = categoryId,
-                ProductId = existingProduct.Id
+                CategoryId = categoryId
             });
         }
 
@@ -165,7 +232,8 @@ namespace Test.Controllers
     ViewBag.Categories = _context.Categories.ToList();
     ViewBag.SelectedCategories = selectedCategories;
     return View(product);
-    }
+}
+
 
 
         // GET: Products/Delete/5
@@ -185,19 +253,31 @@ namespace Test.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(int id)
+    {
+    var userId = HttpContext.Session.GetInt32("UserId");
+    var product = _context.Products.FirstOrDefault(p => p.Id == id && p.UserId == userId.Value);
+    if (product == null)
+    {
+        return NotFound();
+    }
+
+    // Slette bildet hvis det finnes
+    if (!string.IsNullOrEmpty(product.ImageUrl))
+    {
+        var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.ImageUrl.TrimStart('/'));
+        if (System.IO.File.Exists(imagePath))
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            var product = _context.Products.FirstOrDefault(p => p.Id == id && p.UserId == userId.Value);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            _context.Products.Remove(product);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            System.IO.File.Delete(imagePath);
         }
+    }
+
+    _context.Products.Remove(product);
+    _context.SaveChanges();
+    return RedirectToAction(nameof(Index));
+}
+
     }
 }

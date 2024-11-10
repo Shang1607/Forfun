@@ -9,6 +9,12 @@
 
     <div class="row">
         <!-- Venstre kolonne: Produktdetaljer -->
+        <div class="card mb-4">
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name" />
+    }
+    <div class="card-body">
         <div class="col-lg-8">
             <div class="card mb-4">
                 <div class="card-body">

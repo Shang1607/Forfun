@@ -19,7 +19,8 @@
 
 <table class="table">
     <thead>
-        <tr>
+        <tr>    
+            <th>Bilde</th>
             <th>Navn</th>
             <th>Beskrivelse</th>
             <th>Kalorier</th>
@@ -33,6 +34,12 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                <img src="@item.ImageUrl" alt="@item.Name" style="max-width: 100px;" />
+                }
+                </td>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
                 <td>@item.Calories</td>

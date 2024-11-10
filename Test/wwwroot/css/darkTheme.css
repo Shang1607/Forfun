@@ -12186,7 +12186,7 @@ textarea.form-control-lg {
 }
 
 .about-us-container h1, .about-us-container h2 {
-  color: #ffffff; /* Gjør overskriftene hvite */
+  color: #007bff; /* Gjør overskriftene hvite */
 }
 
 .about-us-container p, .about-us-container li {
@@ -12209,6 +12209,7 @@ textarea.form-control-lg {
 
 .card-text, .list-unstyled li {
   font-size: 1.1rem;
+  color:#ffffff
 }
 
 .list-unstyled li i {
