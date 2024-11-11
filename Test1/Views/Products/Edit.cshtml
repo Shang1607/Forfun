@@ -1,0 +1,87 @@
+﻿@model Test.Models.Product
+
+@{
+    ViewData["Title"] = "Rediger produkt";
+    var categories = ViewBag.Categories as List<Test.Models.Category>;
+    var selectedCategories = ViewBag.SelectedCategories as int[];
+}
+
+<h1>Rediger produkt</h1>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Calories" class="form-label"></label>
+        <input asp-for="Calories" class="form-control" type="number" />
+        <span asp-validation-for="Calories" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Fat" class="form-label"></label>
+        <input asp-for="Fat" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Fat" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Carbohydrates" class="form-label"></label>
+        <input asp-for="Carbohydrates" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Carbohydrates" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Protein" class="form-label"></label>
+        <input asp-for="Protein" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="Protein" class="text-danger"></span>
+    </div>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <div class="mb-3">
+            <label class="form-label">Eksisterende bilde:</label><br />
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="img-thumbnail" style="max-width: 200px;" />
+        </div>
+    }
+
+    <!-- Filopplastingskontroll for nytt bilde -->
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label">Oppdater bilde</label>
+        <input asp-for="ImageUrl" type="file" class="form-control" accept="image/*" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+        <div class="mb-3">
+        <label class="form-label"><strong>Kategorier:</strong></label>
+        <div>
+            @foreach (var category in categories)
+            {
+                var isChecked = selectedCategories.Contains(category.Id) ? "checked" : "";
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="selectedCategories" value="@category.Id" id="category_@category.Id" @isChecked />
+                    <label class="form-check-label" for="category_@category.Id">
+                        @if (category.IsKeyhole)
+                        {
+                            <strong>@category.Name</strong>
+                        }
+                        else
+                        {
+                            @category.Name
+                        }
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Lagre</button>
+    <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

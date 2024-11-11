@@ -9,4 +9,7 @@ public class EditProfileViewModel
 
     // For å vise eksisterende profilbilde
     public string? ExistingProfileImageUrl { get; set; }
+
+    // brukes til å laste opp et nytt bilde
+    public IFormFile ProfileImage { get; set; }
 }

@@ -1,0 +1,43 @@
+﻿@model List<Test.Models.Product>
+
+@{
+    ViewData["Title"] = "Søkeresultater";
+    var query = ViewBag.Query as string;
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Søkeresultater for "@query"</h1>
+
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <!-- Hvis du har bilder av produktene -->
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">@product.Description</p>
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Vis detaljer</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Ingen produkter funnet som matcher søket ditt.</p>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <p>Ingen produkter funnet som matcher søket ditt.</p>
+    <p>Prøv et annet søkeord eller besøk <a asp-controller="Products" asp-action="Index">produktlisten</a>.</p>
+}

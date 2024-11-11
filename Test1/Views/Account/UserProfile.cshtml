@@ -1,0 +1,33 @@
+﻿@model Test.Models.User
+
+<div class="container mt-5">
+    <h1>Din Profil</h1>
+    <p>Her kan du se informasjonen om kontoen din.</p>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.CompanyName</h5>
+            
+            <!-- <p class="card-text"><strong>Profilbilde</strong></p> -->
+            <br/>
+            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+            {
+                <img src="@Model.ProfileImageUrl" alt="Profilbilde" class="img-thumbnail" style="width: 150px;">
+            }
+            else
+            {
+                <p>Ingen profilbilde lastet opp.</p>
+            }
+            <br/>
+            <br/>
+            <p class="card-text"><strong>E-post:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Biografi:</strong> @Model.Bio</p>
+ 
+        </div>
+    </div>
+
+    <!-- Knapp for å redigere profil -->
+    <a asp-action="EditProfile" class="btn btn-primary mt-3">Rediger Profil</a>
+
+    <!-- Knapp for å endre passord -->
+    <a asp-action="ChangePassword" class="btn btn-secondary mt-3">Endre Passord</a>
+</div>
