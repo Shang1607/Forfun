@@ -41,5 +41,6 @@ namespace Test.Models
 
          public string? ImageUrl { get; set; }
          
+
     }
 }
