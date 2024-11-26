@@ -1,48 +1,60 @@
 ﻿@{
-    ViewData["Title"] = "About Us";
+    ViewData["Title"] = "Om oss";
 }
 
-<div class="container my-5">
+<div class="container my-5 text-muted">
     <!-- Banner eller Jumbotron -->
     <div class="text-center mb-5">
         <h1 class="display-4">About us</h1>
-        <p class="lead text-secondary">Din pålitelige plattform for sunnere matvalg</p>
+        <p class="lead">Your platform for product infomration</p>
     </div>
 
-<div class="features-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">Velkommen til MatPortalen</h2>
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <i class="bi bi-box-seam feature-icon display-4 mb-3"></i>
-                        <h3 class="card-title">Our mission</h3>
-                        <p class="card-text">effective tool to categorties products</p>
-                    </div>
+    <!-- Funksjoner eller seksjoner -->
+    <div class="row">
+        <!-- Seksjon 1: Vårt oppdrag -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-light shadow-sm text-center border-0">
+                <div class="card-body">
+                    <i class="bi bi-people-fill display-4 mb-3 text-primary"></i>
+                    <h3 class="card-title">Vårt oppdrag</h3>
+                    <p class="card-text">
+                        Vi ønsker å gjøre det enklere for alle å ta sunne og informerte matvalg ved å tilby en brukervennlig plattform med pålitelig produktinformasjon.
+                    </p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <i class="bi bi-pencil-square feature-icon display-4 mb-3"></i>
-                        <h3 class="card-title">Our mission</h3>
-                        <p class="card-text"> - Enkel Registrering: Opprett en leverandørkonto og begynn å legge inn produkter umiddelbart.
-                                            - Detaljert Produktinfo: Del ingredienser, næringsinnhold og nøkkelhullsmerket status.
-                                            - Brukervennlig Grensesnitt: Naviger plattformen med letthet, enten du er leverandør eller forbruker. </p>
-                    </div>
+        </div>
+        <!-- Seksjon 2: Hva vi tilbyr -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-light shadow-sm text-center border-0">
+                <div class="card-body">
+                    <i class="bi bi-lightbulb-fill display-4 mb-3 text-warning"></i>
+                    <h3 class="card-title">Hva vi tilbyr</h3>
+                    <p class="card-text">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Enkel registrering av produkter</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Detaljert produktinformasjon</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Brukervennlig grensesnitt</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <i class="bi bi-bar-chart feature-icon display-4 mb-3"></i>
-                        <h3 class="card-title">Get in touch!</h3>
-                        <p class="card-text">Do you have any question or just cant to talk? contact us and well get back to you as soon as possible! </p>
-                    </div>
+        </div>
+        <!-- Seksjon 3: Kontakt oss -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-light shadow-sm text-center border-0">
+                <div class="card-body">
+                    <i class="bi bi-envelope-fill display-4 mb-3 text-info"></i>
+                    <h3 class="card-title">Kom i kontakt</h3>
+                    <p class="card-text">
+                        Har du spørsmål eller ønsker du å samarbeide med oss? Ta kontakt, og vi vil svare deg så snart som mulig!
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <!-- Call to Action -->
+    <div class="text-center mt-5">
+        <a href="/Contact" class="btn btn-primary btn-lg">Kontakt oss i dag</a>
+    </div>
+</div>
