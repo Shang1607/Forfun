@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Test.Data;
 using Test.Models;
+using Test.ViewModels;
 
 namespace Test.Controllers
 {
@@ -120,61 +121,79 @@ namespace Test.Controllers
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int id)
+    {
+    var userId = HttpContext.Session.GetInt32("UserId");
+    if (userId == null)
+    {
+        return RedirectToAction("Login", "Account");
+    }
+
+    var product = await _context.Products
+        .Include(p => p.ProductCategories)
+        .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId.Value);
+
+    if (product == null)
+    {
+        return NotFound();
+    }
+
+    var model = new EditProductViewModel
+    {
+        Id = product.Id,
+        Name = product.Name,
+        Description = product.Description,
+        Calories = product.Calories,
+        Fat = product.Fat,
+        Carbohydrates = product.Carbohydrates,
+        Protein = product.Protein,
+        ExistingImageUrl = product.ImageUrl,
+        SelectedCategories = product.ProductCategories.Select(pc => pc.CategoryId).ToArray(),
+        AllCategories = await _context.Categories.ToListAsync()
+    };
+
+    return View(model);
+}
+
+
+ 
+// POST: Products/Edit
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, EditProductViewModel model)
+{
+    var userId = HttpContext.Session.GetInt32("UserId");
+    if (userId == null)
+    {
+        return RedirectToAction("Login", "Account");
+    }
+    if (id != model.Id)
+    {
+        return NotFound();
+    }
+
+    // Fyll ut AllCategories igjen før validering
+    model.AllCategories = await _context.Categories.ToListAsync();
+
+    if (ModelState.IsValid)
+    {
+        var existingProduct = await _context.Products
+            .Include(p => p.ProductCategories)
+            .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId.Value);
+        if (existingProduct == null)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            var product = await _context.Products
-                .Include(p => p.ProductCategories)
-                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId.Value);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Categories = await _context.Categories.ToListAsync();
-            ViewBag.SelectedCategories = product.ProductCategories.Select(pc => pc.CategoryId).ToArray();
-
-            return View(product);
+            return NotFound();
         }
 
-        // POST: Products/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product, int[] selectedCategories, IFormFile ImageUrl)
-        {
-            var userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                var existingProduct = await _context.Products
-                    .Include(p => p.ProductCategories)
-                    .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId.Value);
-                if (existingProduct == null)
-                {
-                    return NotFound();
-                }
+        // Oppdater egenskaper
+        existingProduct.Name = model.Name;
+        existingProduct.Description = model.Description;
+        existingProduct.Calories = model.Calories;
+        existingProduct.Fat = model.Fat;
+        existingProduct.Carbohydrates = model.Carbohydrates;
+        existingProduct.Protein = model.Protein;
 
-                // Oppdater egenskaper
-                existingProduct.Name = product.Name;
-                existingProduct.Description = product.Description;
-                existingProduct.Calories = product.Calories;
-                existingProduct.Fat = product.Fat;
-                existingProduct.Carbohydrates = product.Carbohydrates;
-                existingProduct.Protein = product.Protein;
-
-                // Håndtere bildeopplasting
-        if (ImageUrl != null && ImageUrl.Length > 0)
+        // Håndtere bildeopplasting
+        if (model.ImageFile != null && model.ImageFile.Length > 0)
         {
             // Slett eksisterende bilde hvis det finnes
             if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
@@ -187,12 +206,13 @@ namespace Test.Controllers
             }
 
             // Generer et unikt filnavn
-            var fileName = Path.GetFileNameWithoutExtension(ImageUrl.FileName);
-            var extension = Path.GetExtension(ImageUrl.FileName);
+            var fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            var extension = Path.GetExtension(model.ImageFile.FileName);
             var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
 
             // Angi banen der filen skal lagres
             var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+
             if (!Directory.Exists(uploads))
             {
                 Directory.CreateDirectory(uploads);
@@ -203,31 +223,41 @@ namespace Test.Controllers
             // Lagre filen
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                ImageUrl.CopyTo(fileStream);
+                await model.ImageFile.CopyToAsync(fileStream);
             }
 
             // Lagre filbanen i produktet
             existingProduct.ImageUrl = $"/uploads/{uniqueFileName}";
         }
-
-                // Oppdater kategorier
-                existingProduct.ProductCategories.Clear();
-                foreach (var categoryId in selectedCategories)
-                {
-                    existingProduct.ProductCategories.Add(new ProductCategory
-                    {
-                        CategoryId = categoryId
-                    });
-                }
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewBag.Categories = await _context.Categories.ToListAsync();
-            ViewBag.SelectedCategories = selectedCategories;
-            return View(product);
+        else
+        {
+            // Hvis ikke et nytt bilde er lastet opp, behold det eksisterende bildet
+            existingProduct.ImageUrl = model.ExistingImageUrl;
         }
+
+        // Oppdater kategorier
+        existingProduct.ProductCategories.Clear();
+        if (model.SelectedCategories != null)
+        {
+            foreach (var categoryId in model.SelectedCategories)
+            {
+                existingProduct.ProductCategories.Add(new ProductCategory
+                {
+                    CategoryId = categoryId
+                });
+            }
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    // Hvis ModelState ikke er gyldig, returner visningen med modellen
+    return View(model);
+}
+
+
+
 
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int id)
