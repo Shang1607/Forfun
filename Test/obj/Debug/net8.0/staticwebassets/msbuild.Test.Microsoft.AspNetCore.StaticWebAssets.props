@@ -1008,22 +1008,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Test.bundle.scp.css))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\0d191b0d-e1b6-430d-ae7e-cbcd6fe96f78_1161813.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Test</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Test</BasePath>
-      <RelativePath>uploads/0d191b0d-e1b6-430d-ae7e-cbcd6fe96f78_1161813.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\0d191b0d-e1b6-430d-ae7e-cbcd6fe96f78_1161813.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\1161813_152b9162-7c15-4d47-81d7-97a0e3fe7375.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Test</SourceId>
@@ -1039,22 +1023,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\1161813_152b9162-7c15-4d47-81d7-97a0e3fe7375.jpg))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\1161813_2d53810a-8dd0-479a-ae76-b9672fe71be6.jpg))">
-      <SourceType>Package</SourceType>
-      <SourceId>Test</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/Test</BasePath>
-      <RelativePath>uploads/1161813_2d53810a-8dd0-479a-ae76-b9672fe71be6.jpg</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\1161813_2d53810a-8dd0-479a-ae76-b9672fe71be6.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\1161813_cb4e87c1-c45d-4893-b4ab-b2ef5fdd9f7d.jpg))">
       <SourceType>Package</SourceType>
@@ -1312,6 +1280,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\8580fce0-1ef6-469e-8b9d-fb5d7805ae75_1169180.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\d986da83-a90b-4513-9518-58169f91afb5_1189484.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>Test</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Test</BasePath>
+      <RelativePath>uploads/d986da83-a90b-4513-9518-58169f91afb5_1189484.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\d986da83-a90b-4513-9518-58169f91afb5_1189484.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\e5c8ce94-e2bb-4c44-886d-b29e707ea768_burgerkingLogo.png))">
       <SourceType>Package</SourceType>
       <SourceId>Test</SourceId>
@@ -1392,12 +1376,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\wp10165089-genshin-impact-scenery-wallpapers_43632202-4e4e-4ddf-9496-587108ffb3b9.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\wp10165089-genshin-impact-scenery-wallpapers_b1d674e2-1619-4fec-a536-5d10cdb1d3b1.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\wp10165089-genshin-impact-scenery-wallpapers_bb8e36b6-4d41-4a4e-bb39-33ea48c5cc1e.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Test</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Test</BasePath>
-      <RelativePath>uploads/wp10165089-genshin-impact-scenery-wallpapers_b1d674e2-1619-4fec-a536-5d10cdb1d3b1.jpg</RelativePath>
+      <RelativePath>uploads/wp10165089-genshin-impact-scenery-wallpapers_bb8e36b6-4d41-4a4e-bb39-33ea48c5cc1e.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -1406,7 +1390,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\wp10165089-genshin-impact-scenery-wallpapers_b1d674e2-1619-4fec-a536-5d10cdb1d3b1.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\wp10165089-genshin-impact-scenery-wallpapers_bb8e36b6-4d41-4a4e-bb39-33ea48c5cc1e.jpg))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

@@ -262,60 +262,77 @@ namespace Test.Controllers
         }
 
         // GET: Login
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View(); // returns Views/Account/Login.cshtml
-        }
+    [HttpGet]
+    public IActionResult Login()
+    {
+    var userId = HttpContext.Session.GetInt32("UserId");
+    if (userId != null)
+    {
+        return RedirectToAction("UserProfile");
+    }
+
+    return View();
+    }
+
 
         // POST: Login
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+ [HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    // Sjekk om brukeren allerede er logget inn
+    var userId = HttpContext.Session.GetInt32("UserId");
+    if (userId != null)
+    {
+        // Brukeren er allerede logget inn
+        return RedirectToAction("AlreadyLoggedIn");
+    }
+
+    if (!ModelState.IsValid)
+    {
+        // Logg valideringsfeil
+        foreach (var state in ModelState)
         {
-            if (!ModelState.IsValid)
+            foreach (var error in state.Value.Errors)
             {
-                // Logg valideringsfeil
-                foreach (var state in ModelState)
-                {
-                    foreach (var error in state.Value.Errors)
-                    {
-                        _logger.LogWarning($"Key: {state.Key}, Error: {error.ErrorMessage}");
-                    }
-                }
-                return View(model);
-            }
-
-            try
-            {
-                // Autentiser brukeren
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                if (user != null)
-                {
-                    // Verifiser passordet
-                    var passwordHasher = new PasswordHasher<User>();
-                    var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
-
-                    if (result == PasswordVerificationResult.Success)
-                    {
-                        // Sett session-variabler
-                        HttpContext.Session.SetInt32("UserId", user.Id);
-                        HttpContext.Session.SetString("CompanyName", user.CompanyName ?? user.Email);
-
-                        return RedirectToAction("UserProfile");
-                    }
-                }
-
-                // Autentisering feilet
-                ModelState.AddModelError("", "invalid email or password");
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occured during login.");
-                ModelState.AddModelError("", "an error occured during login. Please try again later.");
-                return View(model);
+                _logger.LogWarning($"Key: {state.Key}, Error: {error.ErrorMessage}");
             }
         }
+        return View(model);
+    }
+
+    try
+    {
+        // Autentiser brukeren
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+        if (user != null)
+        {
+            // Verifiser passordet
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
+
+            if (result == PasswordVerificationResult.Success)
+            {
+                // Sett session-variabler
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("CompanyName", user.CompanyName ?? user.Email);
+
+                return RedirectToAction("UserProfile");
+            }
+        }
+
+        // Autentisering feilet
+        ModelState.AddModelError("", "Ugyldig e-post eller passord.");
+        return View(model);
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "En feil oppstod under innlogging.");
+        ModelState.AddModelError("", "En feil oppstod under innlogging. Vennligst prøv igjen senere.");
+        return View(model);
+    }
+}
+
 
         // POST: Logout
         [HttpPost]
@@ -327,6 +344,13 @@ namespace Test.Controllers
 
             // Omdiriger til startsiden eller innloggingssiden
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AlreadyLoggedIn()
+        {
+        var companyName = HttpContext.Session.GetString("CompanyName") ?? "Bruker";
+        ViewBag.CompanyName = companyName;
+        return View();
         }
 
         // GET: UserProfile

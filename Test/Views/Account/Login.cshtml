@@ -1,7 +1,23 @@
 ﻿@model LoginViewModel
 
 
-<div class="auth-container">
+@{
+    ViewData["Title"] = "Logg inn";
+    var userId = Context.Session.GetInt32("UserId");
+}
+
+@if (userId != null)
+{
+    <!-- Brukeren er allerede logget inn -->
+    <div class="container mt-5">
+        <h1>Du er allerede logget inn!</h1>
+        <form asp-controller="Account" asp-action="Logout" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Logg ut</button>
+        </form>
+    </div>
+}
+else { <div class="auth-container">
     <div class="row">
         <div class="col-md-6 offset-md-3 signup-section">
             <h2>Logg Inn</h2>
@@ -30,3 +46,4 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
+}

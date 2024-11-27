@@ -4,19 +4,20 @@
     <h1>Rediger Profil</h1>
     <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
-
+        <br/>
         <div class="mb-3">
             <label asp-for="CompanyName" class="form-label">Firmanavn</label>
             <input asp-for="CompanyName" class="form-control" />
             <span asp-validation-for="CompanyName" class="text-danger"></span>
         </div>
+        <br/>
 
         <div class="mb-3">
             <label asp-for="Bio" class="form-label">Biografi</label>
             <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
             <span asp-validation-for="Bio" class="text-danger"></span>
         </div>
-
+        <br/>
         <!-- Vis eksisterende profilbilde -->
         <div class="mb-3">
             <p><strong>Nåværende Profilbilde:</strong></p>
@@ -29,13 +30,13 @@
                 <p>Ingen profilbilde lastet opp.</p>
             }
         </div>
-
+        <br/>
         <!-- Opplasting av nytt profilbilde -->
         <div class="mb-3">
             <label for="ProfileImage" class="form-label">Last opp nytt profilbilde</label>
             <input type="file" name="ProfileImage" class="form-control" />
         </div>
-
+        <br/>
         <button type="submit" class="btn btn-primary">Lagre Endringer</button>
         <a asp-action="UserProfile" class="btn btn-secondary">Avbryt</a>
     </form>

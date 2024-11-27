@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Already logged in!";
+}
+
+<div class="container mt-5">
+    <h1>Hei, @ViewBag.CompanyName!</h1>
+    <p>Youre already signed in</p>
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Logg out</button>
+    </form>
+</div>

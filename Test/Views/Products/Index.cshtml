@@ -8,27 +8,27 @@
     <h1 class="mb-0">Produkter</h1>
     @if (Context.Session.GetInt32("UserId") != null)
     {
-        <a asp-action="Create" class="btn btn-primary">Legg til nytt produkt</a>
+        <a asp-action="Create" class="btn btn-primary">Add a new product</a>
     }
     else
     {
-        <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Logg inn for å legge til produkt</a>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Log inn to add product</a>
     }
 </div>
 
 <div class="search-section py-5">
     <div class="container">
-        <h2 class="text-center mb-4">Søk etter produkter</h2>
+        <h2 class="text-center mb-4">Search for Products</h2>
         <form asp-controller="Home" asp-action="Search" method="get" class="d-flex justify-content-center">
             <input type="text" name="query" class="form-control w-50 me-2" placeholder="Skriv inn produktnavn..." />
-            <button type="submit" class="btn btn-primary">Søk</button>
+            <button type="submit" class="btn btn-primary">search</button>
         </form>
     </div>
 </div>
 
 <table class="table">
     <thead>
-        <tr>    
+        <tr>
             <th>Bilde</th>
             <th>Navn</th>
             <th>Beskrivelse</th>
@@ -36,7 +36,7 @@
             <th>Fett</th>
             <th>Karbohydrater</th>
             <th>Proteiner</th>
-            <th></th>
+            <th>Handlinger</th>
         </tr>
     </thead>
     <tbody>
@@ -56,14 +56,23 @@
                 <td>@item.Carbohydrates</td>
                 <td>@item.Protein</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a>
-                    @if (Context.Session.GetInt32("UserId") == item.UserId)
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Slett</a>
-                    }
+                    <div class="btn-group" role="group">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-info-circle-fill" me-1></i> Detaljer
+                        </a>
+                        @if (Context.Session.GetInt32("UserId") == item.UserId)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-pencil-fill" me-1></i> Rediger
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash-fill me-1"></i> Slett
+                            </a>
+                        }
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

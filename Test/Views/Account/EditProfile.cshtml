@@ -8,19 +8,19 @@
 
 <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
-
+    <br/>
     <div class="form-group">
         <label asp-for="CompanyName"></label>
         <input asp-for="CompanyName" class="form-control" />
         <span asp-validation-for="CompanyName" class="text-danger"></span>
     </div>
-
+    <br/>
     <div class="form-group">
         <label asp-for="Bio"></label>
         <textarea asp-for="Bio" class="form-control"></textarea>
         <span asp-validation-for="Bio" class="text-danger"></span>
     </div>
-
+    <br/>
     <!-- Vise eksisterende profilbilde hvis det finnes -->
     @if (!string.IsNullOrEmpty(Model.ExistingProfileImageUrl))
     {
@@ -29,14 +29,14 @@
             <img src="@Model.ExistingProfileImageUrl" alt="Profilbilde" class="img-thumbnail" style="max-width: 200px;" />
         </div>
     }
-
+    <br/>
     <!-- Felt for å laste opp nytt bilde (valgfritt) -->
     <div class="form-group">
         <label asp-for="ProfileImage">Last opp nytt profilbilde (valgfritt):</label>
         <input asp-for="ProfileImage" type="file" class="form-control-file" accept="image/*" />
         <span asp-validation-for="ProfileImage" class="text-danger"></span>
     </div>
-
+    <br/>
     <button type="submit" class="btn btn-primary">Lagre endringer</button>
     <a asp-action="UserProfile" class="btn btn-secondary">Avbryt</a>
 </form>
